@@ -1,0 +1,44 @@
+# Dependências
+node_modules/
+/.pnp
+.pnp.js
+
+# Builds Next.js
+/.next/
+/out/
+/build/
+
+# Banco de dados local (SQLite) — não enviar para produção
+prisma/dev.db
+prisma/dev.db-journal
+
+# Variáveis de ambiente — NUNCA versionar
+.env
+.env*.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDEs e editores
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Prisma (cliente gerado)
+/generated/prisma
