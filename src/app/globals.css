@@ -5,13 +5,13 @@
     --bg-page: #0b0f19;
     --bg-card: rgba(17, 24, 39, 0.75);
     --bg-card-hover: rgba(31, 41, 55, 0.85);
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-highlight: rgba(16, 185, 129, 0.25);
+    --primary: #a855f7;
+    --primary-hover: #9333ea;
+    --accent: #f43f5e;
+    --accent-hover: #e11d48;
     
-    --primary: #10b981;
-    --primary-hover: #059669;
-    --accent: #f59e0b;
-    --accent-hover: #d97706;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(168, 85, 247, 0.35);
     
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
@@ -59,21 +59,21 @@
 }
 
 .gradient-brand {
-  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #f59e0b 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 45%, #ec4899 85%, #f59e0b 100%);
 }
 
 .gradient-brand-text {
-  background: linear-gradient(135deg, #34d399 0%, #10b981 40%, #fbbf24 100%);
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 40%, #f472b6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient-subtle {
-  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
 }
 
 .glow-primary {
-  box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.4);
 }
 
 .glow-accent {
@@ -88,4 +88,177 @@
 
 .animate-pulse-subtle {
   animation: pulseSubtle 3s infinite ease-in-out;
+}
+
+/* ============================================
+   GALAXY BACKGROUND SYSTEM
+   ============================================ */
+
+/* Nebula drift animation */
+@keyframes nebulaDrift {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.18; }
+  33%  { transform: translate(30px, -20px) scale(1.08); opacity: 0.24; }
+  66%  { transform: translate(-20px, 30px) scale(0.95); opacity: 0.16; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.18; }
+}
+
+/* Star twinkle */
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.5); }
+}
+
+/* Slow rotation for galaxy core */
+@keyframes galaxySpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Shooting star */
+@keyframes shootingStar {
+  0%   { transform: translateX(0) translateY(0) scaleX(1); opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { transform: translateX(600px) translateY(300px) scaleX(3); opacity: 0; }
+}
+
+/* Galaxy wrapper */
+.galaxy-bg {
+  position: relative;
+  background-color: #05070f;
+}
+
+.galaxy-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(99, 60, 180, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 85%, rgba(30, 80, 200, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 55% 50%, rgba(180, 50, 120, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 5%  90%, rgba(40, 120, 220, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 90% 15%, rgba(220, 80, 180, 0.08) 0%, transparent 50%);
+  background-color: #05070f;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Stars layer — pure CSS dot field */
+.galaxy-bg::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10%  8%,  rgba(255,255,255,0.85) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25%  22%, rgba(255,255,255,0.60) 0%, transparent 100%),
+    radial-gradient(1px 1px at 42%  5%,  rgba(255,255,255,0.90) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55%  35%, rgba(255,255,255,0.50) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70%  12%, rgba(255,255,255,0.75) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85%  28%, rgba(255,255,255,0.65) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92%  55%, rgba(255,255,255,0.80) 0%, transparent 100%),
+    radial-gradient(1px 1px at 3%   48%, rgba(255,255,255,0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15%  65%, rgba(255,255,255,0.70) 0%, transparent 100%),
+    radial-gradient(1px 1px at 33%  78%, rgba(255,255,255,0.60) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50%  60%, rgba(255,255,255,0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 62%  88%, rgba(255,255,255,0.80) 0%, transparent 100%),
+    radial-gradient(1px 1px at 78%  72%, rgba(255,255,255,0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88%  90%, rgba(255,255,255,0.70) 0%, transparent 100%),
+    radial-gradient(2px 2px at 18%  40%, rgba(200,200,255,0.45) 0%, transparent 100%),
+    radial-gradient(2px 2px at 40%  50%, rgba(200,200,255,0.35) 0%, transparent 100%),
+    radial-gradient(2px 2px at 60%  20%, rgba(200,200,255,0.50) 0%, transparent 100%),
+    radial-gradient(2px 2px at 80%  45%, rgba(200,200,255,0.40) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5%   80%, rgba(255,255,255,0.65) 0%, transparent 100%),
+    radial-gradient(1px 1px at 22%  93%, rgba(255,255,255,0.50) 0%, transparent 100%),
+    radial-gradient(1px 1px at 47%  97%, rgba(255,255,255,0.75) 0%, transparent 100%),
+    radial-gradient(1px 1px at 72%  97%, rgba(255,255,255,0.60) 0%, transparent 100%),
+    radial-gradient(1px 1px at 95%  5%,  rgba(255,255,255,0.85) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30%  15%, rgba(255,255,255,0.40) 0%, transparent 100%),
+    radial-gradient(1px 1px at 65%  70%, rgba(255,255,255,0.55) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+  animation: starTwinkle 6s ease-in-out infinite alternate;
+}
+
+/* Nebula orbs that slowly drift */
+.galaxy-nebula {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+}
+
+.galaxy-nebula-1 {
+  width: 600px;
+  height: 500px;
+  top: -10%;
+  left: -8%;
+  background: radial-gradient(ellipse, rgba(120, 50, 220, 0.25) 0%, transparent 70%);
+  animation: nebulaDrift 28s ease-in-out infinite;
+}
+
+.galaxy-nebula-2 {
+  width: 700px;
+  height: 550px;
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(ellipse, rgba(30, 80, 220, 0.20) 0%, transparent 70%);
+  animation: nebulaDrift 34s ease-in-out infinite reverse;
+}
+
+.galaxy-nebula-3 {
+  width: 500px;
+  height: 400px;
+  top: 35%;
+  right: 20%;
+  background: radial-gradient(ellipse, rgba(220, 50, 150, 0.14) 0%, transparent 70%);
+  animation: nebulaDrift 40s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+.galaxy-nebula-4 {
+  width: 400px;
+  height: 350px;
+  top: 60%;
+  left: 10%;
+  background: radial-gradient(ellipse, rgba(40, 140, 240, 0.12) 0%, transparent 70%);
+  animation: nebulaDrift 36s ease-in-out infinite reverse;
+  animation-delay: -18s;
+}
+
+/* Shooting stars */
+.shooting-star {
+  position: fixed;
+  width: 3px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.9), transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  animation: shootingStar linear infinite;
+}
+
+.shooting-star:nth-child(1) {
+  top: 15%; left: 5%;
+  animation-duration: 8s;
+  animation-delay: 1s;
+}
+
+.shooting-star:nth-child(2) {
+  top: 30%; left: 25%;
+  width: 4px;
+  animation-duration: 12s;
+  animation-delay: 4s;
+}
+
+.shooting-star:nth-child(3) {
+  top: 8%; left: 55%;
+  animation-duration: 10s;
+  animation-delay: 7s;
+}
+
+/* Content must be above the galaxy layers */
+.galaxy-content {
+  position: relative;
+  z-index: 1;
 }
