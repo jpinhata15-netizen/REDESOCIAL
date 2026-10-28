@@ -50,26 +50,39 @@ function MessagesContent() {
   }, [loadConversations]);
 
   // Carregar mensagens da conversa ativa
-  const loadActiveMessages = useCallback(async () => {
+  const loadActiveMessages = useCallback(async (isPolling = false) => {
     if (!activePartnerId) return;
-    setLoadingChat(true);
+    if (!isPolling) setLoadingChat(true);
     try {
       const res = await fetch(`/api/mensagens?with=${activePartnerId}`);
       const data = await res.json();
       if (data.messages) {
-        setMessages(data.messages);
+        setMessages((prev) => {
+          if (
+            prev.length !== data.messages.length ||
+            (prev.length > 0 && data.messages.length > 0 && prev[prev.length - 1].id !== data.messages[data.messages.length - 1].id)
+          ) {
+            return data.messages;
+          }
+          return prev;
+        });
         if (data.partner) setActivePartner(data.partner);
       }
     } catch (err) {
-      console.error("Erro ao carregar chat:", err);
+      if (!isPolling) console.error("Erro ao carregar chat:", err);
     } finally {
-      setLoadingChat(false);
+      if (!isPolling) setLoadingChat(false);
     }
   }, [activePartnerId]);
 
   useEffect(() => {
     loadActiveMessages();
-  }, [loadActiveMessages]);
+    const interval = setInterval(() => {
+      loadActiveMessages(true);
+      loadConversations();
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [loadActiveMessages, loadConversations]);
 
   // Scroll para a última mensagem
   useEffect(() => {
