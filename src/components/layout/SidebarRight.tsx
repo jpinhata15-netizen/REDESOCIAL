@@ -54,7 +54,7 @@ export default function SidebarRight() {
 
   const trendingTopics = [
     { tag: "Brasil", postsCount: "12,4 mil posts", href: "/busca?q=Brasil" },
-    { tag: "ConectaSocial", postsCount: "8,9 mil posts", href: "/busca?q=Conecta" },
+    { tag: "OrbitaSocial", postsCount: "8,9 mil posts", href: "/busca?q=Orbita" },
     { tag: "TecnologiaBrasil", postsCount: "5,2 mil posts", href: "/busca?q=Tecnologia" },
     { tag: "Fotografia", postsCount: "3,7 mil posts", href: "/busca?q=Fotografia" },
     { tag: "CulturaBrasileira", postsCount: "2,8 mil posts", href: "/busca?q=Cultura" },
@@ -66,7 +66,7 @@ export default function SidebarRight() {
       <div className="glass-panel rounded-2xl p-4 border border-white/5">
         <div className="flex items-center gap-2 mb-3">
           <Users className="w-5 h-5 text-emerald-400" />
-          <h3 className="text-base font-bold text-white">Quem Seguir no Conecta</h3>
+          <h3 className="text-base font-bold text-white">Quem Seguir na Órbita</h3>
         </div>
 
         <div className="flex flex-col gap-3">
@@ -152,7 +152,7 @@ export default function SidebarRight() {
           <Link href="/comunidades" className="hover:text-slate-300 transition-colors">Comunidades</Link>
         </div>
         <p className="text-slate-600">
-          Conecta Social © {new Date().getFullYear()} — Feito com orgulho para o Brasil.
+          Órbita © {new Date().getFullYear()} — Seu mundo. Suas conexões.
         </p>
       </footer>
     </aside>

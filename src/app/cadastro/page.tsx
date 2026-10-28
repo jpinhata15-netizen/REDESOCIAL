@@ -44,7 +44,7 @@ export default function RegisterPage() {
     setLoading(false);
 
     if (result.success) {
-      toast.success("Conta criada com sucesso! Seja bem-vindo(a) à Conecta.");
+      toast.success("Conta criada com sucesso! Seja bem-vindo(a) à Órbita.");
       router.push("/onboarding");
     } else {
       toast.error(result.error || "Erro ao criar conta.");
@@ -52,9 +52,9 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0f19] flex flex-col justify-center items-center px-4 py-12 relative overflow-hidden selection:bg-emerald-500 selection:text-slate-950">
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none -z-0"></div>
-      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -z-0"></div>
+    <div className="min-h-screen bg-[#070a14] flex flex-col justify-center items-center px-4 py-12 relative overflow-hidden selection:bg-purple-500 selection:text-white">
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none -z-0"></div>
+      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none -z-0"></div>
 
       <div className="w-full max-w-md relative z-10 flex flex-col items-center">
         <div className="mb-6">
@@ -63,9 +63,9 @@ export default function RegisterPage() {
 
         <div className="w-full glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl bg-slate-900/90 backdrop-blur-2xl">
           <div className="mb-6 text-center">
-            <h1 className="text-xl font-bold text-white">Criar sua conta</h1>
+            <h1 className="text-xl font-bold text-white">Criar sua conta na Órbita</h1>
             <p className="text-xs text-slate-400 mt-1">
-              Participe da nova experiência social feita para os brasileiros.
+              Seu mundo. Suas conexões. Faça parte agora.
             </p>
           </div>
 

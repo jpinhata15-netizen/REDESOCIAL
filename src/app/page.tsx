@@ -6,6 +6,7 @@ import PostCard from "@/components/feed/PostCard";
 import PostComposerModal from "@/components/feed/PostComposerModal";
 import { useAuth } from "@/context/AuthContext";
 import { Sparkles, Flame, Users, Clock, Image, Video, PenSquare, RefreshCw } from "lucide-react";
+import { OrbitPlanetIcon } from "@/components/brand/Logo";
 
 export default function HomePage() {
   const { user } = useAuth();
@@ -93,13 +94,14 @@ export default function HomePage() {
             </div>
           </div>
         ) : (
-          <div className="glass-panel rounded-2xl p-6 border border-emerald-500/20 bg-gradient-to-br from-emerald-950/40 via-slate-900 to-amber-950/20 text-center flex flex-col items-center gap-3 shadow-xl">
-            <div className="w-12 h-12 rounded-2xl gradient-brand flex items-center justify-center text-slate-950 font-black shadow-lg shadow-emerald-500/30">
-              ✦
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-purple-500/30 bg-gradient-to-br from-slate-900 via-purple-950/20 to-slate-950 text-center flex flex-col items-center gap-3.5 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-1/4 w-60 h-60 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="p-3 rounded-2xl bg-white/[0.04] border border-white/10 shadow-lg">
+              <OrbitPlanetIcon className="w-12 h-12" />
             </div>
-            <h2 className="text-2xl font-black text-white">Bem-vindo(a) à Conecta!</h2>
-            <p className="text-base text-slate-300 max-w-md leading-relaxed">
-              A rede social brasileira feita para valorizar conexões reais, trocas culturais e comunidades autênticas.
+            <h2 className="text-2xl sm:text-3xl font-black text-white">Bem-vindo(a) à Órbita!</h2>
+            <p className="text-base text-slate-300 max-w-md leading-relaxed font-medium">
+              Seu mundo. Suas conexões. Uma rede social para aproximar pessoas e ideias.
             </p>
             <div className="flex items-center gap-3 mt-1">
               <a
@@ -193,7 +195,7 @@ export default function HomePage() {
             <p className="text-sm text-slate-400 max-w-sm">
               {activeTab === "seguindo"
                 ? "As pessoas que você segue ainda não publicaram nada recente. Siga mais amigos na barra lateral!"
-                : "Seja a primeira pessoa a publicar e puxar conversa na rede Conecta!"}
+                : "Seja a primeira pessoa a publicar e puxar conversa na Órbita!"}
             </p>
             {user && (
               <button

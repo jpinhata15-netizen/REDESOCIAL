@@ -4,11 +4,11 @@ import { AuthProvider } from "@/context/AuthContext";
 import { ToastProvider } from "@/context/ToastContext";
 
 export const metadata: Metadata = {
-  title: "Conecta — A Rede Social Brasileira",
+  title: "Órbita — Seu mundo. Suas conexões.",
   description:
-    "A rede social feita para conexões autênticas, comunidades vibrantes, depoimentos e troca de experiências pelo Brasil.",
-  keywords: ["rede social", "brasil", "conecta", "comunidades", "depoimentos", "amigos"],
-  authors: [{ name: "Conecta Brasil" }],
+    "Uma rede social para aproximar pessoas e ideias. Comunidades vibrantes, depoimentos autênticos e bate-papo em tempo real.",
+  keywords: ["órbita", "rede social", "conexões", "comunidades", "depoimentos", "brasil", "amigos"],
+  authors: [{ name: "Órbita" }],
 };
 
 export default function RootLayout({
