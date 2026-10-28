@@ -6,6 +6,7 @@ import SidebarLeft from "./SidebarLeft";
 import SidebarRight from "./SidebarRight";
 import MobileNav from "./MobileNav";
 import PostComposerModal from "../feed/PostComposerModal";
+import OnlineUsersWidget from "../chat/OnlineUsersWidget";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -56,6 +57,9 @@ export default function AppShell({ children, hideRightSidebar = false }: AppShel
           }
         }}
       />
+
+      {/* Widget Flutuante de Usuários Online */}
+      <OnlineUsersWidget />
     </div>
   );
 }
