@@ -12,14 +12,13 @@ import {
   MessageSquare,
   UserPlus,
   UserCheck,
-  Heart,
   Share2,
   Edit3,
-  Camera,
   Layers,
   Image as ImageIcon,
   CheckCircle2,
-  Lock,
+  Users,
+  UserRound,
 } from "lucide-react";
 import AppShell from "@/components/layout/AppShell";
 import PostCard from "@/components/feed/PostCard";
@@ -35,10 +34,13 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
 
   const [profileData, setProfileData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"posts" | "testimonials" | "media" | "about">("posts");
+  const [activeTab, setActiveTab] = useState<"posts" | "testimonials" | "media" | "about" | "conexoes">("posts");
   const [isFollowing, setIsFollowing] = useState(false);
   const [followersCount, setFollowersCount] = useState(0);
   const [isSendTestimonialOpen, setIsSendTestimonialOpen] = useState(false);
+  const [conexoesTab, setConexoesTab] = useState<"seguidores" | "seguindo">("seguidores");
+  const [conexoesList, setConexoesList] = useState<any[]>([]);
+  const [conexoesLoading, setConexoesLoading] = useState(false);
 
   const loadProfile = useCallback(async () => {
     setLoading(true);
@@ -87,6 +89,30 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
       navigator.clipboard.writeText(window.location.href);
       toast.success("Link do perfil copiado! 📋");
     }
+  };
+
+  const loadConexoes = async (tipo: "seguidores" | "seguindo") => {
+    setConexoesLoading(true);
+    setConexoesList([]);
+    try {
+      const res = await fetch(`/api/usuarios/${username}/conexoes?tipo=${tipo}`);
+      const data = await res.json();
+      if (data.users) setConexoesList(data.users);
+    } catch {
+      toast.error("Erro ao carregar conexões.");
+    } finally {
+      setConexoesLoading(false);
+    }
+  };
+
+  const handleConexoesTabClick = (tipo: "seguidores" | "seguindo") => {
+    setConexoesTab(tipo);
+    loadConexoes(tipo);
+  };
+
+  const handleOpenConexoes = () => {
+    setActiveTab("conexoes");
+    loadConexoes(conexoesTab);
   };
 
   if (loading) {
@@ -259,23 +285,29 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
               </div>
             </div>
 
-            {/* Barra de Métricas */}
+            {/* Barra de Métricas — clicável para ver seguidores/seguindo */}
             <div className="flex items-center gap-6 pt-4 border-t border-white/5 text-sm">
               <div className="flex items-center gap-1.5">
                 <strong className="text-white font-bold">{user._count?.posts || 0}</strong>
                 <span className="text-slate-400 text-xs">Publicações</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <strong className="text-white font-bold">{followersCount}</strong>
-                <span className="text-slate-400 text-xs">Seguidores</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <strong className="text-white font-bold">{user._count?.following || 0}</strong>
-                <span className="text-slate-400 text-xs">Seguindo</span>
-              </div>
+              <button
+                onClick={() => { handleOpenConexoes(); handleConexoesTabClick("seguidores"); }}
+                className="flex items-center gap-1.5 hover:text-purple-400 transition-colors group"
+              >
+                <strong className="text-white font-bold group-hover:text-purple-300">{followersCount}</strong>
+                <span className="text-slate-400 text-xs group-hover:text-purple-400">Seguidores</span>
+              </button>
+              <button
+                onClick={() => { handleOpenConexoes(); handleConexoesTabClick("seguindo"); }}
+                className="flex items-center gap-1.5 hover:text-purple-400 transition-colors group"
+              >
+                <strong className="text-white font-bold group-hover:text-purple-300">{user._count?.following || 0}</strong>
+                <span className="text-slate-400 text-xs group-hover:text-purple-400">Seguindo</span>
+              </button>
               <div className="flex items-center gap-1.5">
                 <strong className="text-amber-400 font-bold">{user._count?.receivedTestimonials || 0}</strong>
-                <span className="text-slate-400 text-xs">Depoimentos Aceitos</span>
+                <span className="text-slate-400 text-xs">Depoimentos</span>
               </div>
             </div>
           </div>
@@ -323,12 +355,24 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
             onClick={() => setActiveTab("about")}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all shrink-0 ${
               activeTab === "about"
-                ? "bg-emerald-600/20 text-emerald-300 border border-emerald-500/30"
+                ? "bg-purple-600/20 text-purple-300 border border-purple-500/30"
                 : "text-slate-400 hover:text-white hover:bg-slate-800/40"
             }`}
           >
             <CheckCircle2 className="w-4 h-4" />
-            <span>Sobre & Interesses</span>
+            <span>Sobre</span>
+          </button>
+
+          <button
+            onClick={handleOpenConexoes}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all shrink-0 ${
+              activeTab === "conexoes"
+                ? "bg-purple-600/20 text-purple-300 border border-purple-500/30"
+                : "text-slate-400 hover:text-white hover:bg-slate-800/40"
+            }`}
+          >
+            <Users className="w-4 h-4" />
+            <span>Conexões</span>
           </button>
         </div>
 
@@ -424,7 +468,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                   {interestsList.map((interest: string, i: number) => (
                     <span
                       key={i}
-                      className="text-xs px-3 py-1.5 rounded-full bg-emerald-950/40 text-emerald-300 border border-emerald-500/30"
+                      className="text-xs px-3 py-1.5 rounded-full bg-purple-950/40 text-purple-300 border border-purple-500/30"
                     >
                       {interest}
                     </span>
@@ -432,6 +476,99 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                 </div>
               ) : (
                 <p className="text-xs text-slate-500">Nenhum interesse selecionado.</p>
+              )}
+            </div>
+          </div>
+        )}
+
+        {activeTab === "conexoes" && (
+          <div className="glass-panel rounded-2xl border border-white/5 overflow-hidden">
+            {/* Sub-abas: Seguidores / Seguindo */}
+            <div className="flex border-b border-white/5">
+              <button
+                onClick={() => handleConexoesTabClick("seguidores")}
+                className={`flex-1 flex items-center justify-center gap-2 py-3.5 text-sm font-bold transition-all ${
+                  conexoesTab === "seguidores"
+                    ? "text-purple-300 bg-purple-600/15 border-b-2 border-purple-500"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <UserRound className="w-4 h-4" />
+                <span>Seguidores</span>
+                <span className="text-xs font-normal bg-white/10 px-2 py-0.5 rounded-full">
+                  {followersCount}
+                </span>
+              </button>
+              <button
+                onClick={() => handleConexoesTabClick("seguindo")}
+                className={`flex-1 flex items-center justify-center gap-2 py-3.5 text-sm font-bold transition-all ${
+                  conexoesTab === "seguindo"
+                    ? "text-purple-300 bg-purple-600/15 border-b-2 border-purple-500"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <Users className="w-4 h-4" />
+                <span>Seguindo</span>
+                <span className="text-xs font-normal bg-white/10 px-2 py-0.5 rounded-full">
+                  {user._count?.following || 0}
+                </span>
+              </button>
+            </div>
+
+            {/* Lista */}
+            <div className="p-4">
+              {conexoesLoading ? (
+                <div className="flex flex-col gap-3">
+                  {[1,2,3,4].map(n => (
+                    <div key={n} className="flex items-center gap-3 animate-pulse">
+                      <div className="w-12 h-12 rounded-full bg-slate-800 shrink-0" />
+                      <div className="flex-1 flex flex-col gap-1.5">
+                        <div className="w-32 h-3.5 bg-slate-800 rounded" />
+                        <div className="w-20 h-2.5 bg-slate-800 rounded" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : conexoesList.length === 0 ? (
+                <div className="text-center py-10 flex flex-col items-center gap-2">
+                  <Users className="w-8 h-8 text-slate-600" />
+                  <p className="text-sm text-slate-400">
+                    {conexoesTab === "seguidores"
+                      ? `${user.name} ainda não tem seguidores.`
+                      : `${user.name} ainda não segue ninguém.`}
+                  </p>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-1">
+                  {conexoesList.map((u: any) => (
+                    <Link
+                      key={u.id}
+                      href={`/perfil/${u.username}`}
+                      className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group"
+                    >
+                      <img
+                        src={u.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.username}`}
+                        alt={u.name}
+                        className="w-12 h-12 rounded-full object-cover border border-slate-700 group-hover:border-purple-500 transition-colors shrink-0"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-bold text-white group-hover:text-purple-300 transition-colors truncate">
+                            {u.name}
+                          </span>
+                          {u.isVerified && <Sparkles className="w-3 h-3 text-amber-400 shrink-0" />}
+                        </div>
+                        <span className="text-xs text-slate-400">@{u.username}</span>
+                        {u.bio && (
+                          <p className="text-xs text-slate-500 truncate mt-0.5">{u.bio}</p>
+                        )}
+                      </div>
+                      <span className="text-xs text-slate-500 shrink-0">
+                        {u._count?.followers || 0} seg.
+                      </span>
+                    </Link>
+                  ))}
+                </div>
               )}
             </div>
           </div>
