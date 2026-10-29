@@ -21,7 +21,7 @@ export default function Navbar({ onOpenComposer }: { onOpenComposer?: () => void
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-header backdrop-blur-xl border-b border-white/5 bg-slate-950/80">
+    <header className="sticky top-0 z-40 w-full glass-header">
       <div className="w-full px-3 sm:px-5 h-16 flex items-center justify-between gap-4 max-w-screen-2xl mx-auto">
         {/* Lado Esquerdo: Logo */}
         <div className="flex items-center gap-6">
@@ -37,7 +37,7 @@ export default function Navbar({ onOpenComposer }: { onOpenComposer?: () => void
               placeholder="Buscar pessoas, comunidades, assuntos #..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-900/90 border border-slate-800 text-base rounded-full pl-10 pr-4 py-2.5 text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all shadow-inner"
+              className="w-full bg-white/5 border border-white/10 text-base rounded-full pl-10 pr-4 py-2.5 text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/40 transition-all shadow-inner backdrop-blur-sm"
             />
           </div>
         </form>
@@ -50,7 +50,7 @@ export default function Navbar({ onOpenComposer }: { onOpenComposer?: () => void
               {onOpenComposer && (
                 <button
                   onClick={onOpenComposer}
-                  className="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg shadow-emerald-900/20 hover:shadow-emerald-900/40 transition-all active:scale-95"
+                  className="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg shadow-purple-900/30 hover:shadow-purple-900/50 transition-all active:scale-95"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Publicar</span>
@@ -74,7 +74,7 @@ export default function Navbar({ onOpenComposer }: { onOpenComposer?: () => void
               >
                 <Bell className="w-5 h-5" />
                 {user.unreadNotifications && user.unreadNotifications > 0 ? (
-                  <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-emerald-500 text-slate-950 text-[10px] font-bold flex items-center justify-center animate-pulse">
+                  <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-purple-500 text-white text-[10px] font-bold flex items-center justify-center animate-pulse">
                     {user.unreadNotifications > 9 ? "9+" : user.unreadNotifications}
                   </span>
                 ) : null}
@@ -84,7 +84,7 @@ export default function Navbar({ onOpenComposer }: { onOpenComposer?: () => void
               <div className="relative">
                 <button
                   onClick={() => setShowDropdown(!showDropdown)}
-                  className="flex items-center gap-2 p-1 rounded-full border border-emerald-500/30 hover:border-emerald-500/60 transition-all focus:outline-none"
+                  className="flex items-center gap-2 p-1 rounded-full border border-purple-500/40 hover:border-purple-500/80 transition-all focus:outline-none"
                 >
                   <img
                     src={user.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.username}`}
@@ -102,7 +102,7 @@ export default function Navbar({ onOpenComposer }: { onOpenComposer?: () => void
                     <div className="absolute right-0 mt-2 w-56 rounded-2xl glass-dropdown z-50 py-2 text-sm shadow-2xl border border-slate-800 text-slate-200">
                       <div className="px-4 py-3 border-b border-slate-800/80">
                         <p className="font-semibold text-white truncate">{user.name}</p>
-                        <p className="text-xs text-emerald-400">@{user.username}</p>
+                        <p className="text-xs text-purple-400">@{user.username}</p>
                       </div>
 
                       <div className="py-1">
@@ -111,7 +111,7 @@ export default function Navbar({ onOpenComposer }: { onOpenComposer?: () => void
                           onClick={() => setShowDropdown(false)}
                           className="flex items-center gap-3 px-4 py-2 hover:bg-slate-800/70 transition-colors"
                         >
-                          <UserIcon className="w-4 h-4 text-emerald-400" />
+                          <UserIcon className="w-4 h-4 text-purple-400" />
                           <span>Meu Perfil</span>
                         </Link>
 
@@ -179,7 +179,7 @@ export default function Navbar({ onOpenComposer }: { onOpenComposer?: () => void
               </Link>
               <Link
                 href="/cadastro"
-                className="text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-full shadow-lg shadow-emerald-900/30 transition-all active:scale-95"
+                className="text-sm font-semibold bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-full shadow-lg shadow-purple-900/30 transition-all active:scale-95"
               >
                 Cadastrar
               </Link>

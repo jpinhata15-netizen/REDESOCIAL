@@ -7,6 +7,7 @@ import SidebarRight from "./SidebarRight";
 import MobileNav from "./MobileNav";
 import PostComposerModal from "../feed/PostComposerModal";
 import OnlineUsersWidget from "../chat/OnlineUsersWidget";
+import StarField from "./StarField";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -29,8 +30,10 @@ export default function AppShell({ children, hideRightSidebar = false }: AppShel
       <div className="shooting-star" aria-hidden="true" />
       <div className="shooting-star" aria-hidden="true" />
 
-      {/* All interactive content above galaxy layers */}
-      <div className="galaxy-content flex flex-col min-h-screen">
+      {/* All interactive content */}
+      <div className="galaxy-content flex flex-col min-h-screen" style={{ zIndex: 3 }}>
+        {/* Stars canvas — fixed overlay, pointer-events:none so it never blocks clicks */}
+        <StarField />
         {/* Top Navbar */}
         <Navbar onOpenComposer={() => setIsComposerOpen(true)} />
 

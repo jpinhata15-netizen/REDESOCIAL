@@ -37,17 +37,17 @@
 
 /* Glassmorphism & Modern Card */
 .glass-panel {
-  background: rgba(17, 24, 39, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 14, 28, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .glass-header {
-  background: rgba(11, 15, 25, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(5, 7, 15, 0.60);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.12);
 }
 
 .glass-dropdown {
@@ -188,39 +188,39 @@
 }
 
 .galaxy-nebula-1 {
-  width: 600px;
-  height: 500px;
-  top: -10%;
-  left: -8%;
-  background: radial-gradient(ellipse, rgba(120, 50, 220, 0.25) 0%, transparent 70%);
+  width: 750px;
+  height: 650px;
+  top: -15%;
+  left: -10%;
+  background: radial-gradient(ellipse, rgba(140, 60, 255, 0.45) 0%, rgba(100, 30, 200, 0.20) 40%, transparent 70%);
   animation: nebulaDrift 28s ease-in-out infinite;
 }
 
 .galaxy-nebula-2 {
-  width: 700px;
-  height: 550px;
-  bottom: -15%;
-  right: -10%;
-  background: radial-gradient(ellipse, rgba(30, 80, 220, 0.20) 0%, transparent 70%);
+  width: 800px;
+  height: 700px;
+  bottom: -20%;
+  right: -12%;
+  background: radial-gradient(ellipse, rgba(30, 80, 255, 0.38) 0%, rgba(20, 60, 200, 0.18) 40%, transparent 70%);
   animation: nebulaDrift 34s ease-in-out infinite reverse;
 }
 
 .galaxy-nebula-3 {
-  width: 500px;
-  height: 400px;
-  top: 35%;
-  right: 20%;
-  background: radial-gradient(ellipse, rgba(220, 50, 150, 0.14) 0%, transparent 70%);
+  width: 600px;
+  height: 500px;
+  top: 30%;
+  right: 15%;
+  background: radial-gradient(ellipse, rgba(255, 40, 160, 0.28) 0%, rgba(200, 30, 120, 0.12) 40%, transparent 70%);
   animation: nebulaDrift 40s ease-in-out infinite;
   animation-delay: -10s;
 }
 
 .galaxy-nebula-4 {
-  width: 400px;
-  height: 350px;
-  top: 60%;
-  left: 10%;
-  background: radial-gradient(ellipse, rgba(40, 140, 240, 0.12) 0%, transparent 70%);
+  width: 500px;
+  height: 450px;
+  top: 55%;
+  left: 8%;
+  background: radial-gradient(ellipse, rgba(20, 150, 255, 0.25) 0%, rgba(10, 100, 220, 0.12) 40%, transparent 70%);
   animation: nebulaDrift 36s ease-in-out infinite reverse;
   animation-delay: -18s;
 }
